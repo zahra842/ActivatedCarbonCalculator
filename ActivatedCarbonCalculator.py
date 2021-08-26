@@ -6,6 +6,12 @@ import numpy as np
 # Title
 st.title('Activated Carbon Calculator')
 st.write("\n")
+st.write("Welcome to the emission Activated Carbon Calculator. \
+          This calculator will allow you to estimate the emmissions \
+          reserved and removed from the atmosphere by converting farm waste, \
+          specifically palm tree waste, to activated carbon and using it for \
+          removal of emisson. The calculator will take you through the steps and \
+          assumptions made to reach the final estimates Lets get going...")
 
 # Slider
 st.subheader("Biomass Weight (tons)")
