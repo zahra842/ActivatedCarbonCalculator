@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 # Title
-st.title('Activated Carbon Calculator')
+st.title('Sustainable palm tree activated carbon for emissions capture')
 st.write("\n")
 
 st.markdown(
@@ -20,7 +20,7 @@ st.write("\n")
 
 st.markdown(
     """<div style='display: block; text-align: justify;'> \
-          Welcome to the emission Activated Carbon Calculator. \
+          Welcome to the emission activated carbon calculator. \
           This calculator will allow you to estimate the emmissions \
           reserved and removed from the atmosphere by converting farm waste, \
           specifically palm tree waste, to activated carbon and using it for \
@@ -79,7 +79,23 @@ st.markdown(
 )
 emission_adsorption = st.number_input("", key="emission_adsorption", min_value=0, max_value=100, value=10)
 
-st.header("Emission percentage generated per ton of bood burnt")
+st.header("Activated carbon usage per year")
+st.markdown(
+    """<div style='display: block; text-align: justify;'> \
+       The produced activated carbon can be reused. Spent activated carbon can be reactivated using a number \
+       number of chemical methods. The collected emissions can be utilized in chemical processes. For example, \
+       carbon dioxide can be used for producing ploy
+       </div>
+    """,
+    unsafe_allow_html=True,
+)
+emission_adsorption = st.number_input("", key="emission_adsorption", min_value=0, max_value=100, value=10)
+
+
+st.image('images/adsorbtion.png', use_column_width=True)
+
+
+st.header("Emission percentage generated per ton of wood burnt")
 st.markdown(
     """<div style='display: block; text-align: justify;'> \
        Backyard burning is the common practice of burning biomass material. It generates large amount of \
@@ -92,25 +108,23 @@ st.markdown(
 emission_generated = st.number_input("", key="emission_generated", min_value=0, max_value=1000, value=190)
 
 
+
 emission_mass_absorbed = biomass_weight * activated_carbon/100 * emission_adsorption/100
-st.write(emission_mass_absorbed) 
 emission_mass_generated = biomass_weight * emission_generated/100
-st.write(emission_mass_generated)
 
 year = np.array(range(1,11))
-st.write(year)
 yearly_adsorption = year * emission_mass_absorbed
 cum_adsorption = np.cumsum(yearly_adsorption)
 yearly_total = cum_adsorption + 400000
 cum_total = np.cumsum(yearly_total)
-st.write(cum_adsorption)
-st.write(yearly_total)
-st.write(cum_total)
+# st.write(cum_adsorption)
+# st.write(yearly_total)
+# st.write(cum_total)
 
 
 #data = np.vstack([cum_adsorption, cum_total]).transpose()
 data = pd.DataFrame(cum_total, index=year, columns=["cumulative"])
-st.write(data)
+# st.write(data)
 st.line_chart(data)
 
 
