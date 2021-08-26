@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 # Title
-st.title('Sustainable palm tree activated carbon for emissions capture')
+st.title('Sustainable palm tree activated carbon for emissions capture (Work in progress)')
 st.write("\n")
 
 st.markdown(
@@ -84,12 +84,12 @@ st.markdown(
     """<div style='display: block; text-align: justify;'> \
        The produced activated carbon can be reused. Spent activated carbon can be reactivated using a number \
        number of chemical methods. The collected emissions can be utilized in chemical processes. For example, \
-       carbon dioxide can be used for producing ploy
+       carbon dioxide can be used for producing Polyols.
        </div>
     """,
     unsafe_allow_html=True,
 )
-emission_adsorption = st.number_input("", key="emission_adsorption", min_value=0, max_value=100, value=10)
+emission_adsorption = st.number_input("", key="emission_adsorption", min_value=1, max_value=100, value=40)
 
 
 st.image('images/adsorbtion.png', use_column_width=True)
@@ -107,6 +107,7 @@ st.markdown(
 )
 emission_generated = st.number_input("", key="emission_generated", min_value=0, max_value=1000, value=190)
 
+st.header("Results")
 
 
 emission_mass_absorbed = biomass_weight * activated_carbon/100 * emission_adsorption/100
