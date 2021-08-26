@@ -9,7 +9,7 @@ st.write("\n")
 
 st.markdown(
     """<div style='display: block; font-style:italic;'> \
-       Mustafa A. Al Ibrahim, Layla A. Al Ibrahim, and Zahra A. Al Ibrahim 
+       Zahra A. Al Ibrahim, Mustafa A. Al Ibrahim, and Layla A. Al Ibrahim
        </div>
     """,
     unsafe_allow_html=True,
@@ -35,7 +35,7 @@ st.write("\n")
 st.image('images/intro.png', use_column_width=True)
 
 # Slider
-st.header("Biomass Weight (tons)")
+st.header("Biomass weight (tons)")
 st.markdown(
     """<div style='display: block; text-align: justify;'> \
        The biomass is the raw material for the activated carbon in this initiative, \
@@ -51,7 +51,7 @@ biomass_weight = st.slider(
 
 #st.write(biomass_weight)
 
-st.header("Activated Carbon Weight Percentage in Biomass")
+st.header("Activated carbon weight percentage in biomass")
 st.markdown(
     """<div style='display: block; text-align: justify;'> \
        When the biomass undergoes pyrolysis (heating), it produces petrochemical. These petrochemicals \
@@ -65,7 +65,7 @@ st.markdown(
 )
 activated_carbon = st.number_input("", key="activated_carbon", min_value=0, max_value=100, value=7)
 
-st.header("Emission Adsorption Percentage")
+st.header("Emission adsorption percentage")
 st.markdown(
     """<div style='display: block; text-align: justify;'> \
        When the biomass undergoes pyrolysis (heating), it produces petrochemical. These petrochemicals \
@@ -79,8 +79,17 @@ st.markdown(
 )
 emission_adsorption = st.number_input("", key="emission_adsorption", min_value=0, max_value=100, value=10)
 
-st.subheader("Emission Percentage Generated Per Ton of Wood Burnt")
-emission_generated = st.number_input("", key="emission_generated", min_value=0, max_value=1000, value=200)
+st.header("Emission percentage generated per ton of bood burnt")
+st.markdown(
+    """<div style='display: block; text-align: justify;'> \
+       Backyard burning is the common practice of burning biomass material. It generates large amount of \
+       of carbon dioxide. An estimated 190% by weight is generated. For example, 1.9 kg of carbon \
+       dioxide is generated per 1 kg of biomass burned.
+       </div>
+    """,
+    unsafe_allow_html=True,
+)
+emission_generated = st.number_input("", key="emission_generated", min_value=0, max_value=1000, value=190)
 
 
 emission_mass_absorbed = biomass_weight * activated_carbon/100 * emission_adsorption/100
@@ -110,8 +119,8 @@ st.line_chart(data)
 
 
 # Team
-with st.container():
-    st.subheader('Made by:')
-    st.text('Mustafa A. Al Ibrahim, Layla A. Al Ibrahim, and Zahra A. Al Ibrahim')
+# with st.container():
+#     st.subheader('Made by:')
+#     st.text('Mustafa A. Al Ibrahim, Layla A. Al Ibrahim, and Zahra A. Al Ibrahim')
 
 
