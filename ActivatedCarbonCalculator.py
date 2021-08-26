@@ -32,7 +32,7 @@ st.markdown(
 
 st.write("\n")
 
-st.image('images/intro2.png', use_column_width=True)
+st.image('images/intro.png', use_column_width=True)
 
 # Slider
 st.header("Biomass Weight (tons)")
