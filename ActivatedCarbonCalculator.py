@@ -1,10 +1,11 @@
 from google.protobuf.symbol_database import Default
 import streamlit as st
+import altair as alt
 import pandas as pd
 import numpy as np
 
 # Title
-st.title('Sustainable palm tree activated carbon for emissions capture (Work in progress)')
+st.title('Sustainable palm tree activated carbon for emissions capture')
 st.write("\n")
 
 st.markdown(
@@ -106,32 +107,78 @@ st.markdown(
 emission_generated = st.number_input("", key="emission_generated", min_value=0, max_value=1000, value=190)
 
 st.header("Results")
-emission_mass_absorbed = p * activated_carbon/100 * emission_adsorption/100
-emission_mass_generated = biomass_weight * emission_generated/100
+
+emission_mass_adsorbed = biomass_weight * activated_carbon/100 * emission_adsorption/100 * n_usage
+emission_mass_reserved = biomass_weight * emission_generated/100
 
 year = np.array(range(1,11))
-yearly_adsorption = year * emission_mass_absorbed
+yearly_adsorption = year * emission_mass_adsorbed
 cum_adsorption = np.cumsum(yearly_adsorption)
-yearly_total = cum_adsorption + 400000
-cum_total = np.cumsum(yearly_total)
-# st.write(cum_adsorption)
-# st.write(yearly_total)
-# st.write(cum_total)
+
+cum_reserved = year * emission_mass_reserved
+
+ten_year_total = cum_reserved[-1] + cum_adsorption[-1] 
+
+st.markdown(
+    """<div style='display: block; text-align: justify;'> \
+       The following graph shows the cumulative amount of emissions that will be captured by the \
+        activated carbon produced from the biomass over ten years. 
+       </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.write("\n")
+
+source = pd.DataFrame({
+  'Year': year,
+  'Cumulative emissions adsorbed (tons)': cum_adsorption
+})
+
+c = alt.Chart(source).mark_line().encode(
+    x='Year',
+    y='Cumulative emissions adsorbed (tons)'
+)
+
+st.altair_chart(c,  use_container_width=True)
 
 
-#data = np.vstack([cum_adsorption, cum_total]).transpose()
-data = pd.DataFrame(cum_total, index=year, columns=["cumulative"])
-# st.write(data)
-st.line_chart(data)
+# ===================================================
 
 
-#data=[[slider], [slider*0.1]]
-#st.line_chart(data)
+st.markdown(
+    """<div style='display: block; text-align: justify;'> \
+       The following graph shows the cumulative amount of emissions that will be reserved by \
+        preventing backyard burning. 
+       </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.write("\n")
+
+source = pd.DataFrame({
+  'Year': year,
+  'Cumulative emissions reserved (tons)': cum_reserved
+})
+
+c = alt.Chart(source).mark_line().encode(
+    x='Year',
+    y='Cumulative emissions reserved (tons)'
+)
+
+st.altair_chart(c,  use_container_width=True)
 
 
-# Team
-# with st.container():
-#     st.subheader('Made by:')
-#     st.text('Mustafa A. Al Ibrahim, Layla A. Al Ibrahim, and Zahra A. Al Ibrahim')
-
-
+# ====================================================
+st.header("Final remarks")
+st.markdown(
+    f"""<div style='display: block; text-align: justify;'> \
+       A approximate total of {int(ten_year_total)} tons can be reserved over the first ten years by maximizing \
+       the utilization of biomass. At the same time, petrochemicals can be extracted during \
+       during the pyrolysis processes. Overall, biomass in Saudi Arabia is an untabbed resource \
+       that can help us toward sustainable future.
+       </div>
+    """,
+    unsafe_allow_html=True,
+)
