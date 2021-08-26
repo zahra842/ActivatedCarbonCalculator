@@ -87,7 +87,8 @@ st.markdown(
     """<div style='display: block; text-align: justify;'> \
        The produced activated carbon can be reused. Spent activated carbon can be reactivated using a number \
        number of chemical methods. The collected emissions can be utilized in chemical processes. For example, \
-       carbon dioxide can be used for producing Polyols.
+       carbon dioxide can be used for producing Polyols. A reusage of 40 times per year means it takes about  \
+       9 days for the emmisions to adsorb to the activated carbon completely.
        </div>
     """,
     unsafe_allow_html=True,
